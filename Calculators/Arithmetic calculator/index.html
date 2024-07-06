@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arithmetic Progression Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Arithmetic Progression Calculator</h1>
+        <form id="apForm">
+            <label for="firstTerm">First Term (a):</label>
+            <input type="number" id="firstTerm" name="firstTerm" required>
+
+            <label for="commonDifference">Common Difference (d):</label>
+            <input type="number" id="commonDifference" name="commonDifference" required>
+
+            <label for="termNumber">Term Number (n):</label>
+            <input type="number" id="termNumber" name="termNumber" required>
+
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

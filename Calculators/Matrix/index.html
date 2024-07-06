@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Matrix Calculator</h1>
+        <div>
+            <label for="matrix-size">Matrix Size:</label>
+            <input type="number" id="matrix-size" min="1" max="10" value="2">
+            <button onclick="createMatrixInput()">Create Matrix</button>
+        </div>
+        <div id="matrix-input"></div>
+        <div id="result"></div>
+        <div class="buttons">
+            <button onclick="calculateInverse()">Inverse</button>
+            <button onclick="calculateTranspose()">Transpose</button>
+            <button onclick="calculateAddition()">Addition</button>
+            <button onclick="calculateSubtraction()">Subtraction</button>
+            <button onclick="calculateMultiplication()">Multiplication</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

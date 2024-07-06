@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Pedigree Function Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetes Pedigree Function Calculator</h1>
+        <form id="dpf-form">
+            <label for="age-relative1">Age of Relative 1:</label>
+            <input type="number" id="age-relative1" required>
+            
+            <label for="relation1">Degree of Relationship (1 for parent, 0.5 for sibling):</label>
+            <input type="number" id="relation1" step="0.1" required>
+            
+            <label for="diabetic-relative1">Is Relative 1 Diabetic? (1 for yes, 0 for no):</label>
+            <input type="number" id="diabetic-relative1" required>
+            
+            <!-- Add more relatives as needed -->
+            
+            <button type="button" onclick="calculateDPF()">Calculate DPF</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
