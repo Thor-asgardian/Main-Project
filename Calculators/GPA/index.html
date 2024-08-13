@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GPA Calculator</title>
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body>
+    <form id="gpaForm">
+      <h1>GPA Calculator</h1>
+      <div>
+        <label>Number of Subjects:</label>
+        <input
+          type="number"
+          id="numSubjects"
+          name="numSubjects"
+          min="1"
+          value="1"
+          onchange="generateSubjectFields()"
+        />
+      </div>
+      <div id="subjectsContainer">
+        <!-- Subject fields will be generated here -->
+      </div>
+      <button type="button" onclick="calculateGPA()">Calculate GPA</button>
+    </form>
+    <h2 id="result">Your GPA:</h2>
+
+    <script src="javascript.js"></script>
+  </body>
+</html>
