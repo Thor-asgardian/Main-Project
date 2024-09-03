@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Maintenance Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 120vh;
+            background-color: #FFF;
+        }
+        .container {
+            background-color: #000;
+            color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="predictionForm">
+            <h1>Vehicle Maintenance Predictor</h1>
+            <div id="inputFields">
+                <div class="input-group">
+                    <label for="age">Vehicle Age (years):</label>
+                    <input type="text" id="age" name="age" required>
+                </div>
+                <div class="input-group">
+                    <label for="mileage">Mileage (km):</label>
+                    <input type="text" id="mileage" name="mileage" required>
+                </div>
+                <div class="input-group">
+                    <label for="engine_size">Engine Size (cc):</label>
+                    <input type="text" id="engine_size" name="engine_size" required>
+                </div>
+                <div class="input-group">
+                    <label for="fuel_type">Fuel Type:</label>
+                    <input type="text" id="fuel_type" name="fuel_type" required>
+                </div>
+                <div class="input-group">
+                    <label for="last_service">Last Service Date (DD-MM-YYYY):</label>
+                    <input type="date" id="last_service" name="last_service" required>
+                </div>
+                <div class="input-group">
+                    <label for="average_distance">Average Distance Driven per Month (km):</label>
+                    <input type="text" id="average_distance" name="average_distance" required>
+                </div>
+                <div class="input-group">
+                    <label for="tire_condition">Tire Condition:</label>
+                    <input type="text" id="tire_condition" name="tire_condition" required>
+                </div>
+                <div class="input-group">
+                    <label for="brake_condition">Brake Condition:</label>
+                    <input type="text" id="brake_condition" name="brake_condition" required>
+                </div>
+                <div class="input-group">
+                    <label for="oil_level">Oil Level:</label>
+                    <input type="text" id="oil_level" name="oil_level" required>
+                </div>
+            </div>
+            <button type="submit" class="btn">Predict</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const inputData = [];
+            document.querySelectorAll('#inputFields input').forEach(input => {
+                inputData.push(input.value);
+            });
+
+            const lastServiceDate = new Date(document.getElementById('last_service').value);
+            const today = new Date();
+            const timeDiff = today - lastServiceDate;
+            const daysSinceLastService = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+            inputData[4] = daysSinceLastService.toString();
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ input_data: inputData }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Prediction: ${data.prediction}`;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerText = 'Error making prediction';
+            });
+        });
+    </script>
+</body>
+</html>
